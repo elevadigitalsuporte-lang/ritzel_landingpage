@@ -133,6 +133,19 @@ function initWhatsAppFloat() {
   });
 }
 
+// Rastreamento de conversão de WhatsApp para Google Ads
+function initWhatsAppConversion() {
+  const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+  whatsappLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      if (typeof window.gtag_report_conversion === 'function') {
+        e.preventDefault();
+        window.gtag_report_conversion(this.href);
+      }
+    });
+  });
+}
+
 // Initialize all when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
@@ -140,4 +153,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initHeroParticles();
   initWhatsAppFloat();
+  initWhatsAppConversion();
 });

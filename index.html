@@ -11,6 +11,27 @@
     gtag('config', 'AW-10903304242');
   </script>
 
+  <!-- Event snippet for WhatsApp conversion page -->
+  <script>
+  function gtag_report_conversion(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') {
+        // Abre em nova aba para links do WhatsApp para melhor UX, senão abre na mesma
+        if (url.includes('wa.me')) {
+          window.open(url, '_blank');
+        } else {
+          window.location = url;
+        }
+      }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-10903304242/KZ14CMu2y8ocELLwjM8o',
+        'event_callback': callback
+    });
+    return false;
+  }
+  </script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
