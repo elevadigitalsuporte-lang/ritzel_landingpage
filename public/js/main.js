@@ -121,7 +121,6 @@ function initHeroParticles() {
   }
 }
 
-// Tooltip for floating WhatsApp button (show on hover via CSS already, but ensure accessibility)
 function initWhatsAppFloat() {
   const btn = document.getElementById('whatsapp-float-btn');
   const card = document.getElementById('whatsapp-card');
@@ -138,12 +137,29 @@ function initWhatsAppFloat() {
 
   // Mostrar o balão com um delay de 3 segundos
   if (card) {
+    let scrollHideTimer = null;
+
     setTimeout(() => {
-      // Verifica se o usuário já fechou o balão anteriormente nesta sessão
       if (!sessionStorage.getItem('whatsapp-card-closed')) {
         card.classList.add('active');
       }
     }, 3000);
+
+    // Esconder o balão ao rolar (melhora a UX no mobile)
+    const onScroll = debounce(() => {
+      if (card.classList.contains('active') && !sessionStorage.getItem('whatsapp-card-closed')) {
+        card.classList.remove('active');
+        clearTimeout(scrollHideTimer);
+        // Reabrir o balão após 5s parado
+        scrollHideTimer = setTimeout(() => {
+          if (!sessionStorage.getItem('whatsapp-card-closed')) {
+            card.classList.add('active');
+          }
+        }, 5000);
+      }
+    }, 200);
+
+    window.addEventListener('scroll', onScroll);
   }
 
   // Fechar o balão ao clicar no 'X'
