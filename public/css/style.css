@@ -1402,10 +1402,9 @@ ul, ol {
 }
 
 .whatsapp-float__btn img {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
-  filter: brightness(10);
 }
 
 .whatsapp-float__btn::before {
@@ -1507,14 +1506,15 @@ ul, ol {
 .whatsapp-card__name {
   font-family: var(--font-subheading);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--color-black);
 }
 
 .whatsapp-card__msg {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  line-height: 1.4;
+  font-size: 0.92rem;
+  color: #1a1a1a;
+  font-weight: 500;
+  line-height: 1.45;
   margin: 0;
 }
 
@@ -1772,8 +1772,8 @@ ul, ol {
   }
 
   .whatsapp-card {
-    width: 280px;
-    bottom: 70px;
+    width: 300px;
+    bottom: 75px;
   }
 }
 
@@ -1797,5 +1797,27 @@ ul, ol {
   .contact__info-item {
     flex-direction: column;
     gap: 12px;
+  }
+
+  /* Otimizações do WhatsApp para telas muito pequenas */
+  .whatsapp-card {
+    width: calc(100vw - 40px);
+    max-width: 290px;
+    bottom: 75px;
+    right: 0;
+  }
+  .whatsapp-card__avatar {
+    width: 40px;
+    height: 40px;
+  }
+  .whatsapp-card__name {
+    font-size: 0.9rem;
+  }
+  .whatsapp-card__msg {
+    font-size: 0.82rem;
+  }
+  .whatsapp-card__link-wrapper {
+    padding: 12px;
+    gap: 10px;
   }
 }
