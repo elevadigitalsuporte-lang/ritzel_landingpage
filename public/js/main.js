@@ -124,13 +124,37 @@ function initHeroParticles() {
 // Tooltip for floating WhatsApp button (show on hover via CSS already, but ensure accessibility)
 function initWhatsAppFloat() {
   const btn = document.getElementById('whatsapp-float-btn');
+  const card = document.getElementById('whatsapp-card');
+  const closeBtn = document.getElementById('whatsapp-card-close');
+  
   if (!btn) return;
+  
   btn.addEventListener('focus', () => {
     btn.parentElement.classList.add('show-tooltip');
   });
   btn.addEventListener('blur', () => {
     btn.parentElement.classList.remove('show-tooltip');
   });
+
+  // Mostrar o balão com um delay de 3 segundos
+  if (card) {
+    setTimeout(() => {
+      // Verifica se o usuário já fechou o balão anteriormente nesta sessão
+      if (!sessionStorage.getItem('whatsapp-card-closed')) {
+        card.classList.add('active');
+      }
+    }, 3000);
+  }
+
+  // Fechar o balão ao clicar no 'X'
+  if (closeBtn && card) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      card.classList.remove('active');
+      sessionStorage.setItem('whatsapp-card-closed', 'true');
+    });
+  }
 }
 
 // Rastreamento de conversão de WhatsApp para Google Ads
